@@ -58,6 +58,11 @@ with open(sys.argv[1]) as f:
         cur.add(child)
         stack.append(child)
 
+root.children.pop(0)
+root.children.pop(0)
+root.children.pop(0)
+root.children.pop(0)
+root.children.pop(0)
 assert root.children.pop(0).label == 'Home'
 
 print('\n'.join(root.latexify()))

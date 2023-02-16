@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,oneside]{book}
+\documentclass[12pt,a4paper,oneside]{book}
 
 \let\youreallyshouldnotuseover\over
 
@@ -51,6 +51,21 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
 
+% Admonitions.
+\usepackage{tcolorbox}
+\newtcolorbox{info}{colback=green!5!white, colframe=green!50!black, title={Info},fonttitle=\bfseries,}
+\newtcolorbox{example}{colback=green!5!white, colframe=green!50!black, title={Example},fonttitle=\bfseries,}
+\newtcolorbox{note}{colback=green!5!white, colframe=green!50!black, title={Note},fonttitle=\bfseries,}
+\newtcolorbox{hint}{colback=green!5!white, colframe=green!50!black, title={Hint},fonttitle=\bfseries,}
+\newtcolorbox{tip}{colback=green!5!white, colframe=green!50!black, title={Tip},fonttitle=\bfseries,}
+\newtcolorbox{lemma}{colback=green!5!white, colframe=green!50!black, title={Lemma},fonttitle=\bfseries,}
+\newenvironment{admonition_info}{\begin{info}}{\end{info}}
+\newenvironment{admonition_example}{\begin{example}}{\end{example}}
+\newenvironment{admonition_note}{\begin{note}}{\end{note}}
+\newenvironment{admonition_hint}{\begin{hint}}{\end{hint}}
+\newenvironment{admonition_tip}{\begin{tip}}{\end{tip}}
+\newenvironment{admonition_lemma}{\begin{lemma}}{\end{lemma}}
+
 \usepackage{graphicx,grffile}
 \usepackage{float}
 
@@ -97,8 +112,8 @@
     % book layout, different margins for odd and even
     \usepackage[a4paper,top=1.5in,bottom=1.5in,outer=1.8in,inner=1.2in]{geometry}
 \else
-    % screen layout, symmetric margins
-    \usepackage[a4paper,top=1.5in,bottom=1.5in,left=1.5in,right=1.5in]{geometry}
+    % smaller margins for space-constrained devices
+    \usepackage[a4paper,top=0.5in,bottom=0.5in,left=0.5in,right=0.5in]{geometry}
 \fi
 \makeatother
 
@@ -167,10 +182,10 @@
 \usepackage{emptypage}
 
 
-\title{\textsc{{\Huge Algorithms} \\ {\Large translations and community additions}}}
+\title{\textsc{{\Huge Competitive Programming Algorithms} \\ {\Large translations and community additions}}}
 \author{
     Maxim ``e-maxx'' Ivanov (\href{http://e-maxx.ru/}{e-maxx.ru}) \\
-    Various contributors (\href{https://github.com/e-maxx-eng/e-maxx-eng}{e-maxx-eng})}
+    Various contributors (\href{https://github.com/cp-algorithms/cp-algorithms}{cp-algorithms})}
 \date{\today{} \\
 {\footnotesize(based on LASTCOMMIT)}}
 

@@ -83,6 +83,19 @@ while (<>) {
 
     # Convert en-space
     s/&ensp;/\\enspace/g;
+
+    # Expand admonitions.
+    s/\?\?\?/!!!/g;
+
+    # Fixes selective code blocks.
+    s/\w*=== "(Python|C\+\+|Java)"//g;
+
+    # Fixes images and figures.
+    s/<figure>//g;
+    s/<\/figure>//g;
+    s/<figcaption>_?/\*/g;
+    s/_?<\/figcaption>/\*/g;
+    s/<img src="([^"]*)".*\/>/![](\1)/g;
     
     push(@lines, $_);
 }
@@ -90,9 +103,14 @@ while (<>) {
 $content = join('',@lines);
 
 # use unnumbered environments (special, match is allowed between lines)
-$content =~ s/\$\$[\S\s]*\\begin\{(align|eqnarray)\}/\\begin{\1*}/g;
-$content =~ s/\\end\{(align|eqnarray)\}[\S\s]*\$\$/\\end{\1*}/g;
+# $content =~ s/\$\$[\S\s]*\\begin\{(align|eqnarray)\}/\\begin{\1*}/g;
+# $content =~ s/\\end\{(align|eqnarray)\}[\S\s]*\$\$/\\end{\1*}/g;
+
+# Wraps admonitions in a TeX block.
+$content =~ s/!!! ([a-zA-Z0-9]+).*\n+((    .*(\n)*)+)/\\begin{admonition_\1}\n\2\\end{admonition_\1}\n/g;
+
+# Unindents admonitions block inner text.
+# $content =~ s/(\\begin\{admonition.*\})\n(((?!\\end\{admonition).*\n)*)    (.*\n)(((?!\\end\{admonition).*\n)*)\n(\\end\{admonition.*\})/\1\n\2\4\5\n\7/g;
 
 print $content;
-
 print "\n\n";
