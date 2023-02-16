@@ -21,13 +21,16 @@ Build process
 
 Clone or update the submodule using
 
-    git submodule update --init --recursive --remote  # If first time
-    git submodule update --recursive --remote         # Otherwise
+```bash
+git submodule update --init --recursive --remote  # If first time
+git submodule update --recursive --remote         # Otherwise
+```
 
 then
 
-    bash misc/imgfetch.sh
-    make
+```bash
+make -j8  # 8 specifies the number of threads/spanning factor.
+```
 
 Page layout
 -----------

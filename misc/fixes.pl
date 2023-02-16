@@ -96,6 +96,9 @@ while (<>) {
     s/<figcaption>_?/\*/g;
     s/_?<\/figcaption>/\*/g;
     s/<img src="([^"]*)".*\/>/![](\1)/g;
+
+    # Fixes align to aligned.
+    s/\{align(.?)\}/\{aligned\}/g;
     
     push(@lines, $_);
 }
@@ -105,6 +108,10 @@ $content = join('',@lines);
 # use unnumbered environments (special, match is allowed between lines)
 # $content =~ s/\$\$[\S\s]*\\begin\{(align|eqnarray)\}/\\begin{\1*}/g;
 # $content =~ s/\\end\{(align|eqnarray)\}[\S\s]*\$\$/\\end{\1*}/g;
+
+# Fixes align environments inside $$ nesting.
+# $content =~ s/\$\$\n?(\\.*)\\begin\{(align.?)\}/\1\\begin\{\2\}/g;
+# $content =~ s/\\end\{(align.?)\}([^\$\n]*)\n?\$\$/\\end\{\1\}\2/g;
 
 # Wraps admonitions in a TeX block.
 $content =~ s/!!! ([a-zA-Z0-9]+).*\n+((    .*(\n)*)+)/\\begin{admonition_\1}\n\2\\end{admonition_\1}\n/g;
