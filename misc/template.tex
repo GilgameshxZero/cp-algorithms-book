@@ -52,14 +52,18 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
 
+% Allow pandoc to parse between environments.
+\let\Begin\begin
+\let\End\end
+
 % Admonitions.
 \usepackage{tcolorbox}
-\newtcolorbox{info}{colback=green!5!white, colframe=green!50!black, title={Info},fonttitle=\bfseries,}
-\newtcolorbox{example}{colback=green!5!white, colframe=green!50!black, title={Example},fonttitle=\bfseries,}
-\newtcolorbox{note}{colback=green!5!white, colframe=green!50!black, title={Note},fonttitle=\bfseries,}
+\newtcolorbox{info}{colback=blue!5!white, colframe=blue!50!black, title={Info},fonttitle=\bfseries,}
+\newtcolorbox{example}{colback=yellow!5!white, colframe=yellow!50!black, title={Example},fonttitle=\bfseries,}
+\newtcolorbox{note}{colback=blue!5!white, colframe=blue!50!black, title={Note},fonttitle=\bfseries,}
 \newtcolorbox{hint}{colback=green!5!white, colframe=green!50!black, title={Hint},fonttitle=\bfseries,}
 \newtcolorbox{tip}{colback=green!5!white, colframe=green!50!black, title={Tip},fonttitle=\bfseries,}
-\newtcolorbox{lemma}{colback=green!5!white, colframe=green!50!black, title={Lemma},fonttitle=\bfseries,}
+\newtcolorbox{lemma}{colback=red!5!white, colframe=red!50!black, title={Lemma},fonttitle=\bfseries,}
 \newenvironment{admonition_info}{\begin{info}}{\end{info}}
 \newenvironment{admonition_example}{\begin{example}}{\end{example}}
 \newenvironment{admonition_note}{\begin{note}}{\end{note}}
@@ -134,6 +138,9 @@
 \makeatother
 \setkeys{Gin}{width=\ScaleIfNeeded}
 
+\let\oldincludesvg\includesvg
+\def\includesvg#1{\begin{center}\oldincludesvg[width=\textwidth]{#1}\end{center}}
+
 % MathJax compatibility
 \def\lt{<}
 \def\gt{>}
@@ -188,7 +195,7 @@
     Maxim ``e-maxx'' Ivanov (\href{http://e-maxx.ru/}{e-maxx.ru}) \\
     Various contributors (\href{https://github.com/cp-algorithms/cp-algorithms}{cp-algorithms})}
 \date{\today{} \\
-{\footnotesize(based on LASTCOMMIT excluding Continued Fractions and Treaps)}}
+{\footnotesize(based on \href{https://github.com/GilgameshxZero/cp-algorithms}{LASTCOMMIT})}}
 
 \begin{document}
 

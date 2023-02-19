@@ -13,6 +13,13 @@ my $i = 0;
 while (<>) {
     $i=$i+1;
 
+    # Fixes images and figures.
+    # s/<figure>//g;
+    # s/<\/figure>//g;
+    # s/<figcaption>_?/\*/g;
+    # s/_?<\/figcaption>/\*/g;
+    s/<img src="([^"]*)".*\/>/![](\1)/g;
+
     if ($_ !~ /^#+ .*\{#.*\}.*$/) {
         # Top level headers
         s/^# (.*)/# \1 {#$label}/;
@@ -85,17 +92,10 @@ while (<>) {
     s/&ensp;/\\enspace/g;
 
     # Expand admonitions.
-    s/\?\?\?/!!!/g;
+    # s/\?\?\?/!!!/g;
 
     # Fixes selective code blocks.
     s/\w*=== "(Python|C\+\+|Java)"//g;
-
-    # Fixes images and figures.
-    s/<figure>//g;
-    s/<\/figure>//g;
-    s/<figcaption>_?/\*/g;
-    s/_?<\/figcaption>/\*/g;
-    s/<img src="([^"]*)".*\/>/![](\1)/g;
 
     # Fixes align to aligned.
     s/\{align(.?)\}/\{aligned\}/g;
@@ -114,7 +114,7 @@ $content = join('',@lines);
 # $content =~ s/\\end\{(align.?)\}([^\$\n]*)\n?\$\$/\\end\{\1\}\2/g;
 
 # Wraps admonitions in a TeX block.
-$content =~ s/!!! ([a-zA-Z0-9]+).*\n+((    .*(\n)*)+)/\\begin{admonition_\1}\n\2\\end{admonition_\1}\n/g;
+# $content =~ s/!!! ([a-zA-Z0-9]+).*\n+((    .*(\n)*)+)/\\begin{admonition_\1}\n\2\\end{admonition_\1}\n/g;
 
 # Unindents admonitions block inner text.
 # $content =~ s/(\\begin\{admonition.*\})\n(((?!\\end\{admonition).*\n)*)    (.*\n)(((?!\\end\{admonition).*\n)*)\n(\\end\{admonition.*\})/\1\n\2\4\5\n\7/g;

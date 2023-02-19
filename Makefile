@@ -16,10 +16,13 @@ e-maxx.tex: $(TEXS) misc/imgfetch.sh misc/assemble.sh misc/parse_navigation.py m
 	bash misc/imgfetch.sh
 	bash misc/assemble.sh > $@
 
-%.tex: %.md misc/*
-	perl misc/fixes.pl $< | python3 misc/fixes.py | pandoc -f markdown -o $@
+%.tex: %.md misc/prefix.py misc/fixes.pl misc/postfix.py
+	cat $< | python3 misc/prefix.py > $<.tmp
+	perl misc/fixes.pl $<.tmp | python3 misc/postfix.py | pandoc -f markdown -o $@
+	rm $<.tmp
 
 clean:
 	@rm -f $(TEXS)
 	@rm -f e-maxx.*
 	@rm -rf e-maxx-eng/static
+	@rm -rf svg-inkscape
