@@ -18,7 +18,7 @@ while (<>) {
     # s/<\/figure>//g;
     # s/<figcaption>_?/\*/g;
     # s/_?<\/figcaption>/\*/g;
-    s/<img src="([^"]*)".*\/>/![](\1)/g;
+    s/<img src="([^"]*)".*\/?>/![](\1)/g;
 
     if ($_ !~ /^#+ .*\{#.*\}.*$/) {
         # Top level headers
