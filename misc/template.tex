@@ -115,10 +115,11 @@
 \makeatletter
 \if@twoside
     % book layout, different margins for odd and even
-    \usepackage[a4paper,top=1.5in,bottom=1.5in,outer=1.8in,inner=1.2in]{geometry}
+    \usepackage[a4paper,top=1in,bottom=1in,outer=1.2in,inner=0.8in]{geometry}
 \else
     % smaller margins for space-constrained devices
-    \usepackage[a4paper,top=0.5in,bottom=0.5in,left=0.5in,right=0.5in]{geometry}
+    % \usepackage[a4paper,top=0.5in,bottom=0.5in,left=0.5in,right=0.5in]{geometry}
+    \usepackage[a4paper,top=1in,bottom=1in,left=1in,right=1in]{geometry}
 \fi
 \makeatother
 
