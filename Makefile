@@ -1,6 +1,6 @@
 SRCS = $(wildcard e-maxx-eng/src/*/*.md)
 TEXS = $(patsubst %.md, %.tex, $(SRCS))
-LATEXMK_FLAGS = -pdf
+LATEXMK_FLAGS = --shell-escape -pdf
 
 .PHONY: all clean book
 
@@ -10,7 +10,7 @@ travis: LATEXMK_FLAGS += -interaction=nonstopmode -auxdir=aux
 travis: book
 
 e-maxx.pdf: e-maxx.tex
-	latexmk --shell-escape ${LATEXMK_FLAGS} $<
+	latexmk ${LATEXMK_FLAGS} $<
 
 e-maxx.tex: $(TEXS) misc/imgfetch.sh misc/assemble.sh misc/parse_navigation.py misc/template.tex
 	bash misc/imgfetch.sh

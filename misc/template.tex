@@ -15,7 +15,6 @@
 % Essentially the pandoc standard highlighting
 \usepackage{color}
 \usepackage{fancyvrb}
-\usepackage{svg}
 \newcommand{\VerbBar}{|}
 \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small}
@@ -57,13 +56,13 @@
 \let\End\end
 
 % Admonitions.
-\usepackage{tcolorbox}
-\newtcolorbox{info}{colback=blue!5!white, colframe=blue!50!black, title={Info},fonttitle=\bfseries,}
-\newtcolorbox{example}{colback=yellow!5!white, colframe=yellow!50!black, title={Example},fonttitle=\bfseries,}
-\newtcolorbox{note}{colback=blue!5!white, colframe=blue!50!black, title={Note},fonttitle=\bfseries,}
-\newtcolorbox{hint}{colback=green!5!white, colframe=green!50!black, title={Hint},fonttitle=\bfseries,}
-\newtcolorbox{tip}{colback=green!5!white, colframe=green!50!black, title={Tip},fonttitle=\bfseries,}
-\newtcolorbox{lemma}{colback=red!5!white, colframe=red!50!black, title={Lemma},fonttitle=\bfseries,}
+\usepackage[most]{tcolorbox}
+\newtcolorbox{info}{colback=blue!5!white,colframe=blue!50!black,title={Info},fonttitle=\bfseries,breakable,enhanced}
+\newtcolorbox{example}{colback=yellow!5!white,colframe=yellow!50!black,title={Example},fonttitle=\bfseries,breakable,enhanced}
+\newtcolorbox{note}{colback=blue!5!white,colframe=blue!50!black,title={Note},fonttitle=\bfseries,breakable,enhanced}
+\newtcolorbox{hint}{colback=green!5!white,colframe=green!50!black,title={Hint},fonttitle=\bfseries,breakable,enhanced}
+\newtcolorbox{tip}{colback=green!5!white,colframe=green!50!black,title={Tip},fonttitle=\bfseries,breakable,enhanced}
+\newtcolorbox{lemma}{colback=red!5!white,colframe=red!50!black,title={Lemma},fonttitle=\bfseries,breakable,enhanced}
 \newenvironment{admonition_info}{\begin{info}}{\end{info}}
 \newenvironment{admonition_example}{\begin{example}}{\end{example}}
 \newenvironment{admonition_note}{\begin{note}}{\end{note}}
@@ -72,6 +71,8 @@
 \newenvironment{admonition_lemma}{\begin{lemma}}{\end{lemma}}
 
 \usepackage{graphicx,grffile}
+% \usepackage[inkscapelatex=false]{svg}
+\usepackage{svg}
 \usepackage{float}
 
 %%%
@@ -124,6 +125,10 @@
 \makeatother
 
 % Figure centering
+\let\oldincludesvg\includesvg
+% \def\includesvg#1{\begin{center}\oldincludesvg[width=0.8\linewidth]{#1}\end{center}}
+\def\includesvg#1{\begin{center}\resizebox{0.8\linewidth}{!}{\oldincludesvg{#1}}\end{center}}
+
 \let\oldincludegraphics\includegraphics
 \def\includegraphics#1{\begin{center}\oldincludegraphics{#1}\end{center}}
 
@@ -138,9 +143,6 @@
 }
 \makeatother
 \setkeys{Gin}{width=\ScaleIfNeeded}
-
-\let\oldincludesvg\includesvg
-\def\includesvg#1{\begin{center}\oldincludesvg[width=\textwidth]{#1}\end{center}}
 
 % MathJax compatibility
 \def\lt{<}
